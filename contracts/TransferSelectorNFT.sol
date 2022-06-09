@@ -73,7 +73,12 @@ contract TransferSelectorNFT is ITransferSelectorNFT, Ownable {
      * @param collection collection address
      * @dev Support for ERC165 interface is checked AFTER custom implementation
      */
-    function checkTransferManagerForToken(address collection) external view override returns (address transferManager) {
+    function checkTransferManagerForToken(address collection)
+        external
+        view
+        override
+        returns (address transferManager)
+    {
         // Assign transfer manager (if any)
         transferManager = transferManagerSelectorForCollection[collection];
 

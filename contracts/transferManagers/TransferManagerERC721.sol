@@ -10,14 +10,14 @@ import {ITransferManagerNFT} from "../interfaces/ITransferManagerNFT.sol";
  * @notice It allows the transfer of ERC721 tokens.
  */
 contract TransferManagerERC721 is ITransferManagerNFT {
-    address public immutable LOOKS_RARE_EXCHANGE;
+    address public immutable MINTED_EXCHANGE;
 
     /**
      * @notice Constructor
-     * @param _looksRareExchange address of the LooksRare exchange
+     * @param _mintedExchange address of the Minted exchange
      */
-    constructor(address _looksRareExchange) {
-        LOOKS_RARE_EXCHANGE = _looksRareExchange;
+    constructor(address _mintedExchange) {
+        MINTED_EXCHANGE = _mintedExchange;
     }
 
     /**
@@ -35,7 +35,7 @@ contract TransferManagerERC721 is ITransferManagerNFT {
         uint256 tokenId,
         uint256
     ) external override {
-        require(msg.sender == LOOKS_RARE_EXCHANGE, "Transfer: Only LooksRare Exchange");
+        require(msg.sender == MINTED_EXCHANGE, "Transfer: Only Minted Exchange");
         // https://docs.openzeppelin.com/contracts/2.x/api/token/erc721#IERC721-safeTransferFrom
         IERC721(collection).safeTransferFrom(from, to, tokenId);
     }

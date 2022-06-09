@@ -1,65 +1,58 @@
-import type { HardhatUserConfig } from "hardhat/types";
 import { task } from "hardhat/config";
-
-import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
-import "@typechain/hardhat";
-import "hardhat-abi-exporter";
-import "hardhat-gas-reporter";
-import "solidity-coverage";
-import "dotenv/config";
 
-task("accounts", "Prints the list of accounts", async (_args, hre) => {
+// Required for @openzeppelin/test-helpers
+import "@nomiclabs/hardhat-web3";
+import "solidity-coverage";
+
+// This is a sample Hardhat task. To learn how to create your own go to
+// https://hardhat.org/guides/create-task.html
+task("accounts", "Prints the list of accounts", async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
-  accounts.forEach(async (account) => console.info(account.address));
+
+  for (const account of accounts) {
+    console.log(account.address);
+  }
 });
 
-const config: HardhatUserConfig = {
-  defaultNetwork: "hardhat",
-  networks: {
-    hardhat: {
-      allowUnlimitedContractSize: false,
-      hardfork: "berlin", // Berlin is used (temporarily) to avoid issues with coverage
-      mining: {
-        auto: true,
-        interval: 50000,
-      },
-      gasPrice: "auto",
-    },
-  },
-  etherscan: {
-    apiKey: process.env.ETHERSCAN_KEY,
-  },
+// You need to export an object to set up your config
+// Go to https://hardhat.org/config/ to learn more
+
+/**
+ * @type import('hardhat/config').HardhatUserConfig
+ */
+module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.7",
-        settings: { optimizer: { enabled: true, runs: 888888 } },
-      },
-      {
-        version: "0.4.18",
-        settings: { optimizer: { enabled: true, runs: 999 } },
+        version: "0.8.4",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
       },
     ],
   },
-  paths: {
-    sources: "./contracts/",
-    tests: "./test",
-    cache: "./cache",
-    artifacts: "./artifacts",
-  },
-  abiExporter: {
-    path: "./abis",
-    runOnCompile: true,
-    clear: true,
-    flat: true,
-    pretty: false,
-    except: ["test*", "@openzeppelin*", "uniswap*"],
-  },
-  gasReporter: {
-    enabled: !!process.env.REPORT_GAS,
-    excludeContracts: ["test*", "@openzeppelin*"],
+
+  networks: {
+    hardhat: {
+      initialBaseFeePerGas: 0,
+    },
+
+    "cronos-testnet3": {
+      chainName: "cronos",
+      chainNetwork: "testnet3",
+      url: "https://psta-cronos-testnet-rpc.3ona.co",
+      gasPrice: 5000000000000,
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
+    "cronos-mainnet": {
+      chainName: "cronos",
+      chainNetwork: "mainnet",
+      url: "https://rpc.vvs.finance",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
   },
 };
-
-export default config;

@@ -1,0 +1,11 @@
+{
+  "whitelistCurrencyAddr": "0x",
+  "currencyManagerAddr": "0x",
+  "executionManagerAddr": "0x",
+  "protocolFee": 200,
+  "royaltyFeeLimit": 9500,
+  "royaltyFeeManagerAddr": "0x",
+  "wcroAddress": "0x",
+  "feeRecipentAddr": "0x",
+  "mintedExchangeAddr": "0x"
+}

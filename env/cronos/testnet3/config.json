@@ -1,0 +1,11 @@
+{
+  "whitelistCurrencyAddr": "0x6a3173618859C7cd40fAF6921b5E9eB6A76f1fD4",
+  "currencyManagerAddr": "0x6c2Ba6C487950D52f543E41082a818b2e553106D",
+  "executionManagerAddr": "0x0479afdaFa52831F227Ff9ceBb1b316130E1Fc33",
+  "protocolFee": 200,
+  "royaltyFeeLimit": 9500,
+  "royaltyFeeManagerAddr": "0x430915540d9BBDcEb490269556a38E5E0995dD84",
+  "wcroAddress": "0x6a3173618859C7cd40fAF6921b5E9eB6A76f1fD4",
+  "feeRecipentAddr": "0xeF00fE8F8Fe7e77B524b42B8cf4130D52F203e5e",
+  "mintedExchangeAddr": "0xf76Dda3683e895FC49E8977f008b267cb6f1d6f8"
+}
